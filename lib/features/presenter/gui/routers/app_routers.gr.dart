@@ -33,10 +33,10 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const ChatPage(),
       );
     },
-    FavoriteRoute.name: (routeData) {
+    HistoryRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const FavoritePage(),
+        child: const HistoryPage(),
       );
     },
     HomeNavigationRoute.name: (routeData) {
@@ -113,15 +113,15 @@ class ChatRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [FavoritePage]
-class FavoriteRoute extends PageRouteInfo<void> {
-  const FavoriteRoute({List<PageRouteInfo>? children})
+/// [HistoryPage]
+class HistoryRoute extends PageRouteInfo<void> {
+  const HistoryRoute({List<PageRouteInfo>? children})
       : super(
-          FavoriteRoute.name,
+          HistoryRoute.name,
           initialChildren: children,
         );
 
-  static const String name = 'FavoriteRoute';
+  static const String name = 'HistoryRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }

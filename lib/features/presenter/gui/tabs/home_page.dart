@@ -1,15 +1,15 @@
+// ignore_for_file: no_leading_underscores_for_local_identifiers
+
 import 'package:auto_route/auto_route.dart';
 import 'package:broyalty_app/features/presenter/constant/color.dart';
 import 'package:broyalty_app/features/presenter/constant/descriptions.dart';
 import 'package:flutter/material.dart';
 
-import '../routers/app_routers.dart';
-
 @RoutePage()
 class HomePage extends StatefulWidget {
   // final double width;
   // final double height;
-  const HomePage({Key? key}) : super(key: key);
+  const HomePage({super.key});
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -34,7 +34,7 @@ class _HomePageState extends State<HomePage> {
             Container(
               height: _height * 0.2,
               width: _width,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: AppColors.mainColor,
                 borderRadius: BorderRadius.only(
                     bottomLeft: Radius.circular(18),

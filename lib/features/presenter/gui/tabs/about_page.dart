@@ -14,7 +14,7 @@ class _AboutPageState extends State<AboutPage> {
   Widget _buildProfileSection(String name, String email) {
     return Column(
       children: [
-        CircleAvatar(
+        const CircleAvatar(
           radius: 60,
         ),
         Text(name),
@@ -39,9 +39,9 @@ class _AboutPageState extends State<AboutPage> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             _buildProfileSection("Juan Dela Cruz", "juandelacruz@gmail.com"),
-            SizedBox(height: 40), // Adds spacing between sections
+            const SizedBox(height: 40), // Adds spacing between sections
             _buildProfileSection("Juan Dela Cruz", "juandelacruz@gmail.com"),
-            SizedBox(height: 40), // Adds spacing between sections
+            const SizedBox(height: 40), // Adds spacing between sections
             _buildProfileSection("Juan Dela Cruz", "juandelacruz@gmail.com"),
           ],
         ),

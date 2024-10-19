@@ -5,6 +5,8 @@ import 'package:broyalty_app/features/presenter/gui/routers/app_routers.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:path/path.dart' as path;
 
 import '../../constant/color.dart';
 
@@ -50,57 +52,64 @@ class _CameraPageState extends State<CameraPage> {
 
   // Method to capture image
   Future<void> _captureImage(BuildContext context) async {
-    logger.d("Captureing");
+    logger.d("Capturing image...");
     try {
       if (!_controller.value.isInitialized) {
-        // Show error if camera is not initialized
         logger.e("Error: Camera is not initialized.");
         return;
       }
 
-      // Check if the camera is ready to take a picture
       if (_controller.value.isTakingPicture) {
-        // A capture is already pending, do nothing.
-        return;
+        return; // Capture already in progress
       }
 
-      // Take the picture
       final XFile image = await _controller.takePicture();
+      // logger.d("Image captured: ${image.path}");
 
-      // Do something with the captured image, like displaying it or saving it
-      logger.d("Image captured: ${image.path}");
+      // Save the image to external storage
+      String savedImagePath = await _saveImageToStorage(image);
+      logger.d("Image saved to: $savedImagePath");
 
-      // Example: Display the captured image
-      // showDialog(
-      //   context: context,
-      //   builder: (_) => AlertDialog(
-      //     content: Image.file(File(image.path)),
-      //     actions: [
-      //       TextButton(
-      //         child: Text('Close'),
-      //         onPressed: () {
-      //           Navigator.of(context).pop();
-      //         },
-      //       ),
-      //     ],
-      //   ),
-      // );
-
+      // Navigate to the processing page with the saved image
+      // ignore: use_build_context_synchronously
       AutoRouter.of(context).push(ProcessingImageRoute(
-        imageFile: image,
+        imageFile: XFile(savedImagePath),
       ));
     } catch (e) {
-      print("Error: $e");
+      logger.e("Error capturing image: $e");
+    }
+  }
+
+  Future<String> _saveImageToStorage(XFile image) async {
+    try {
+      // Get the directory to store images (e.g., external storage directory)
+      Directory? storageDirectory = await getExternalStorageDirectory();
+      String directoryPath =
+          path.join(storageDirectory!.path, 'CapturedImages');
+
+      // Create directory if it doesn't exist
+      await Directory(directoryPath).create(recursive: true);
+
+      // Construct a file path for the image
+      String fileName = path.basename(image.path); // Use original file name
+      String savedImagePath = path.join(directoryPath, fileName);
+
+      // Copy the image to the new location
+      File savedImage = await File(image.path).copy(savedImagePath);
+      return savedImage.path;
+    } catch (e) {
+      logger.e("Error saving image: $e");
+      throw Exception("Error saving image to storage");
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Camera')),
+      appBar: AppBar(title: const Text('Camera')),
       body: _isCameraInitialized
           ? CameraPreview(_controller)
-          : Center(child: CircularProgressIndicator()),
+          : const Center(child: CircularProgressIndicator()),
       floatingActionButton: FloatingActionButton(
         backgroundColor: AppColors.mainColor,
         // mini: true,

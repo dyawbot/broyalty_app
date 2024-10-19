@@ -1,3 +1,5 @@
+// ignore_for_file: no_leading_underscores_for_local_identifiers
+
 import 'dart:async';
 import 'dart:io';
 
@@ -12,7 +14,7 @@ import 'package:logger/logger.dart';
 class ProcessingImagePage extends StatefulWidget {
   final XFile imageFile;
 
-  const ProcessingImagePage(this.imageFile, {Key? key}) : super(key: key);
+  const ProcessingImagePage(this.imageFile, {super.key});
 
   @override
   State<ProcessingImagePage> createState() => _ProcessingImagePageState();
@@ -30,7 +32,7 @@ class _ProcessingImagePageState extends State<ProcessingImagePage> {
   }
 
   void _simulateProgress() {
-    Timer.periodic(Duration(milliseconds: 100), (timer) {
+    Timer.periodic(const Duration(milliseconds: 100), (timer) {
       if (identifyPercentage >= 100.0) {
         timer.cancel();
 
@@ -95,12 +97,12 @@ class _ProcessingImagePageState extends State<ProcessingImagePage> {
                     children: [
                       ElevatedButton(
                           onPressed: () {
-                            AutoRouter.of(context).push(HomeRoute());
+                            AutoRouter.of(context).push(const HomeRoute());
                           },
                           child: const Icon(Icons.home)),
                       ElevatedButton(
                           onPressed: () {
-                            AutoRouter.of(context).push(CameraRoute());
+                            AutoRouter.of(context).push(const CameraRoute());
                           },
                           child: const Icon(Icons.camera))
                     ],
@@ -116,7 +118,7 @@ class _ProcessingImagePageState extends State<ProcessingImagePage> {
 
   @override
   Widget build(BuildContext context) {
-    double _h = MediaQuery.of(context).size.height;
+    //double _h = MediaQuery.of(context).size.height;
     double _w = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
@@ -150,7 +152,7 @@ class _ProcessingImagePageState extends State<ProcessingImagePage> {
                   child: Column(
                     children: [
                       const SizedBox(height: 30),
-                      Text("Wait for a moment"),
+                      const Text("Wait for a moment"),
                       Text(
                           "Identifying: ${identifyPercentage.toStringAsFixed(1)}%"),
                       const SizedBox(height: 25),

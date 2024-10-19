@@ -8,7 +8,7 @@ import '../pages/processing_image.dart';
 import '../pages/splash_screen_page.dart';
 import '../tabs/about_page.dart';
 import '../tabs/chat_page.dart';
-import '../tabs/favorite_page.dart';
+import '../tabs/history_page.dart';
 import '../tabs/home_page.dart';
 
 part 'app_routers.gr.dart';
@@ -16,7 +16,6 @@ part 'app_routers.gr.dart';
 @AutoRouterConfig()
 class AppRouter extends _$AppRouter {
   @override
-  // TODO: implement routes
   List<AutoRoute> get routes => [
         AutoRoute(page: SplashRouteRoute.page, initial: true),
         AutoRoute(page: CameraRoute.page),
@@ -32,7 +31,7 @@ class AppRouter extends _$AppRouter {
             page: AboutRoute.page,
           ), // path: "/about"),
           AutoRoute(
-            page: FavoriteRoute.page,
+            page: HistoryRoute.page,
           ), // path: "/favorite"),
         ]),
       ];

@@ -1,3 +1,5 @@
+// ignore_for_file: unused_element, no_leading_underscores_for_local_identifiers
+
 import 'package:auto_route/auto_route.dart';
 import 'package:broyalty_app/features/presenter/constant/color.dart';
 import 'package:flutter/material.dart';

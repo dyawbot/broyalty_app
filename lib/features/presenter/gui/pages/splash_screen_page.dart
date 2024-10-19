@@ -25,13 +25,13 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
   }
 
   void _startSplashScreenTimer() {
-    Timer(Duration(seconds: 3), () {
-      AutoRouter.of(context).push(HomeNavigationRoute());
+    Timer(const Duration(seconds: 3), () {
+      AutoRouter.of(context).push(const HomeNavigationRoute());
     });
   }
 
   void _simulateProgress() {
-    Timer.periodic(Duration(milliseconds: 100), (timer) {
+    Timer.periodic(const Duration(milliseconds: 100), (timer) {
       if (_progress >= 1.0) {
         timer.cancel();
       } else {

@@ -1,8 +1,11 @@
+// ignore_for_file: no_leading_underscores_for_local_identifiers
+
 import 'package:auto_route/auto_route.dart';
 import 'package:broyalty_app/features/presenter/constant/color.dart';
 import 'package:broyalty_app/features/presenter/constant/ui_boolean.dart';
 import 'package:broyalty_app/features/presenter/gui/routers/app_routers.dart';
 import 'package:flutter/material.dart';
+import 'package:logger/logger.dart';
 
 @RoutePage()
 class HomeNavigationPage extends StatefulWidget {
@@ -17,20 +20,21 @@ class _HomeNavigationPageState extends State<HomeNavigationPage> {
   bool chatNavClick = false;
   bool aboutNavClick = false;
   bool favNavClick = false;
+  final logger = Logger();
 
   @override
   Widget build(BuildContext context) {
     double _width = MediaQuery.of(context).size.width;
-    double _height = MediaQuery.of(context).size.height;
+    // double _height = MediaQuery.of(context).size.height;
     return AutoTabsRouter(
-      routes: [
+      routes: const [
         HomeRoute(
             // height: _height,
             // width: _width,
             ),
         ChatRoute(),
         AboutRoute(),
-        FavoriteRoute(),
+        HistoryRoute(),
       ],
       // transitionBuilder: (context, child, animation) => FadeTransition(
       //   opacity: animation,
@@ -43,7 +47,7 @@ class _HomeNavigationPageState extends State<HomeNavigationPage> {
           bottomNavigationBar: BottomAppBar(
               height: 60,
               color: AppColors.mainColor,
-              shape: CircularNotchedRectangle(),
+              shape: const CircularNotchedRectangle(),
               notchMargin: 6.0,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -138,7 +142,7 @@ class _HomeNavigationPageState extends State<HomeNavigationPage> {
                             });
                           },
                           icon: Icon(
-                            Icons.favorite,
+                            Icons.history,
                             color: favNavClick
                                 ? AppColors.comMainColor
                                 : AppColors.analogMainColor,
@@ -158,8 +162,8 @@ class _HomeNavigationPageState extends State<HomeNavigationPage> {
                   borderRadius: BorderRadius.circular(30)),
               onPressed: () {
                 // Action for camera button
-                print('Camera button pressed');
-                AutoRouter.of(context).push(CameraRoute());
+                logger.d('Camera button pressed');
+                AutoRouter.of(context).push(const CameraRoute());
               },
               child: const Icon(
                 Icons.camera_alt,
