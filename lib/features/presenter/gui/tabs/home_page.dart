@@ -50,7 +50,7 @@ class _HomePageState extends State<HomePage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "Welcome to \nBroyalty Disease Detector",
+                        "Welcome to Broiyalty Disease Detector",
                         style: TextStyle(
                             fontSize: 18,
                             color: Colors.white,
